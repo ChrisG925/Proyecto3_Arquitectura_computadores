@@ -11,7 +11,8 @@
 
 module pochoco_soc #(
   parameter NumWords = 512,
-  parameter MemFile  = ""
+  parameter MemFile  = "",
+  parameter SIMULATION = 0
 ) (
   input  wire       i_Clk,
   input  wire       i_Rst_n,
@@ -108,12 +109,14 @@ module pochoco_soc #(
 
   
   // ROM de instrucciones del juego
-  pochoco_instruccion_rom u_instr_rom (
+  pochoco_instruccion_rom #(
+    .SIMULATION(SIMULATION)
+) u_instr_rom (
     .clk_i   (clk),
     .req_i   (instr_req),
     .addr_i  (instr_addr),
     .rdata_o (instr_rdata)
-  );
+);
 
   // RAM de datos de 64 palabras
   pochoco_data_ram #(

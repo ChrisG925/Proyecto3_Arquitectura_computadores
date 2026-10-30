@@ -1,5 +1,7 @@
 
-module asic_top (
+module asic_top #(
+    parameter SIMULATION = 0
+) (
   input  wire       i_Clk,
   input  wire       i_Rst_n,
 
@@ -30,8 +32,9 @@ module asic_top (
 
   pochoco_soc #(
     .NumWords(512),
-    .MemFile("")
-  ) u_pochoco (
+    .MemFile(""),
+    .SIMULATION(SIMULATION)
+) u_pochoco (
     .i_Clk(i_Clk),
     .i_Rst_n(i_Rst_n),
 
