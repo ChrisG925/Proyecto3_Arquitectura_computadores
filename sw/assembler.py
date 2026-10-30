@@ -1,5 +1,6 @@
 import sys
 import re
+from pathlib import Path
 
 
 def parse_reg(token):
@@ -403,6 +404,33 @@ def assemble_instruction(line, labels, pc):
     )
 
 
+def generate_rom(machine_code, output_file):
+    """Genera una ROM combinacional sintetizable con direcciones en bytes."""
+    if len(machine_code) > 128:
+        raise ValueError("El programa supera la capacidad de 128 palabras de la ROM")
+
+    output_file = Path(output_file)
+    output_file.parent.mkdir(parents=True, exist_ok=True)
+
+    with output_file.open("w", encoding="utf-8") as f:
+        f.write("// Archivo generado automaticamente por assembler.py\n")
+        f.write("// ROM combinacional de instrucciones del juego\n\n")
+        f.write("module game_rom (\n")
+        f.write("  input wire [31:0] addr_i,\n")
+        f.write("  output reg [31:0] data_o\n")
+        f.write(");\n\n")
+        f.write("  always @(*) begin\n")
+        f.write("    case (addr_i)\n")
+        for index, instruction in enumerate(machine_code):
+            f.write(f"      32'h{index * 4:08x}: data_o = 32'h{instruction:08x};\n")
+        f.write("      default: data_o = 32'h00000013; // NOP\n")
+        f.write("    endcase\n")
+        f.write("  end\n")
+        f.write("endmodule\n")
+
+    print(f"ROM Verilog generada: {output_file}")
+
+
 def assemble(input_file, output_file):
     with open(input_file, "r", encoding="utf-8") as f:
         lines = f.readlines()
@@ -429,6 +457,11 @@ def assemble(input_file, output_file):
     with open(output_file, "w", encoding="utf-8") as f:
         for instruction in machine_code:
             f.write(f"{instruction:08x}\n")
+
+    if Path(input_file).name == "game.s":
+        # La ruta depende del propio script, no del directorio actual.
+        rtl_dir = Path(__file__).resolve().parent.parent / "rtl"
+        generate_rom(machine_code, rtl_dir / "game_rom.v")
 
     print(f"Assembler OK")
     print(f"Entrada: {input_file}")
