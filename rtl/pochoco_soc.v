@@ -10,8 +10,6 @@
 // - Nicolas Villegas <navillegas@miuandes.cl>
 
 module pochoco_soc #(
-  parameter NumWords = 512,
-  parameter MemFile  = "",
   parameter SIMULATION = 0
 ) (
   input  wire       i_Clk,

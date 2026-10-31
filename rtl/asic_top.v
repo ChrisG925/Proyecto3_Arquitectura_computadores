@@ -31,8 +31,6 @@ module asic_top #(
 );
 
   pochoco_soc #(
-    .NumWords(512),
-    .MemFile(""),
     .SIMULATION(SIMULATION)
 ) u_pochoco (
     .i_Clk(i_Clk),
