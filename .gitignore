@@ -24,3 +24,12 @@ sim/sim
 
 # Archivos de respaldo
 *.bak
+
+# Resultados generados por LibreLane
+/librelane/runs/
+/librelane/reparacion_postgrt*/
+
+# Archivos locales auxiliares
+/README_backup.md
+/rtl/pochoco_soc_rom.v
+/sim/gf180_cells_functional.v
