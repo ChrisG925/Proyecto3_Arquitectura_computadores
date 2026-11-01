@@ -22,8 +22,8 @@ start_round:
     sw   x4, 4(x2)
 
     lw   x6, 12(x2)
-    lui  x5, 0x07700
-    addi x5, x5, -1700
+    lui  x5, 0x1C9C
+    addi x5, x5, 896
     
 
 wait_3s:
@@ -84,8 +84,8 @@ correct:
     xor  x1, x1, x7
     xor  x1, x1, x6
 
-    lui  x5, 0x262
-    addi x5, x5, 1440
+    lui  x5, 0xF4
+    addi x5, x5, 576
 
     addi x4,  x0, 0
     addi x12, x0, 0
