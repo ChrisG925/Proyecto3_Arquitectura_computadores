@@ -1,0 +1,16 @@
+VCD info: dumpfile sim/asic_gate_wave.vcd opened for output.
+Inicio simulacion ASIC
+Tiempo=0 ns | LEDs=0000
+Reset liberado
+Boton de inicio presionado
+Boton liberado
+Tiempo=13650000 ns | LEDs=1111
+Tiempo=27050000 ns | LEDs=0001
+LED objetivo detectado: 0001
+Boton incorrecto presionado
+Tiempo=30550000 ns | LEDs=1111
+Boton incorrecto liberado
+Tiempo=43950000 ns | LEDs=0001
+LEDs al finalizar: 0001
+Fin de simulacion
+sim/tb_asic_gate.v:106: $finish called at 61000000 (1ps)
