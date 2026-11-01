@@ -3,6 +3,17 @@ set -euo pipefail
 
 mkdir -p experimentos/alu_trazabilidad
 
+echo "===== GENERANDO SINTESIS JERARQUICA ====="
+
+if [ ! -f librelane/runs/sintesis_hierarchy/06-yosys-synthesis/asic_top.nl.v.json ]; then
+    librelane --pdk gf180mcuD \
+      --run-tag sintesis_hierarchy \
+      --to Yosys.Synthesis \
+      librelane/config_hierarchy.json
+fi
+
+echo "===== GENERANDO NETLIST APLANADO ====="
+
 yosys -Q -T -p '
 read_json librelane/runs/sintesis_hierarchy/06-yosys-synthesis/asic_top.nl.v.json
 hierarchy -top asic_top
