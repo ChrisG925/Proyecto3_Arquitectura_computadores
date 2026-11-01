@@ -21,3 +21,6 @@ sim/sim
 *.vcd
 *.csv
 *.vvp
+
+# Archivos de respaldo
+*.bak
