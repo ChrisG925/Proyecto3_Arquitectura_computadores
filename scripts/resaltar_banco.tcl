@@ -1,9 +1,9 @@
-read_db librelane/runs/fisico_rom_util60/final/odb/asic_top.odb
+read_db librelane/runs/fisico_rom_100ns_actualizado/final/odb/asic_top.odb
 
 set block [ord::get_db_block]
 set encontrados 0
 
-for {set i 17057} {$i <= 17544} {incr i} {
+for {set i 16993} {$i <= 17472} {incr i} {
     set nombre "_${i}_"
     set inst [$block findInst $nombre]
 
@@ -13,4 +13,4 @@ for {set i 17057} {$i <= 17544} {incr i} {
     }
 }
 
-puts "Flip-flops resaltados: $encontrados de 488"
+puts "Flip-flops del banco resaltados: $encontrados de 480"
